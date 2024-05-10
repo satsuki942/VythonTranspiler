@@ -5,10 +5,10 @@ from src.vython_parser import Parser
 from src.transpiler import Transpiler
 
 def main():
+    # 変換するコードを取得
     file_path = "test/sample.py"
     with open(file_path, "r") as file:
         code = file.read()
-
     compare_file_path = "test/sample_py.py"
     with open(compare_file_path, "r") as file:
         compare_code = file.read()
@@ -28,9 +28,9 @@ def main():
         print(vythonTree,file=log)
         print("",file=log)
 
-        print("[Python AST]",file=log)
-        print(ast.dump(pythonTree,False,indent=4),file=log)
-        print("",file=log)
+        # print("[Python AST]",file=log)
+        # print(ast.dump(pythonTree,False,indent=4),file=log)
+        # print("",file=log)
 
         # print("[Python AST-compare]",file=log)
         # print(ast.dump(ast.parse(compare_code),False,True,indent=4),file=log)
@@ -38,6 +38,10 @@ def main():
 
         print("[Unparse Python AST]",file=log)
         print(pythonProgram,file=log)
+        print("",file=log)
+
+        print("[Execute]",file=log)
+        print(exec(pythonProgram,globals()),file=log)
         print("",file=log)
         
 

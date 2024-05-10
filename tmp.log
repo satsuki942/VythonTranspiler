@@ -1,234 +1,230 @@
 [Vython AST]
-Tree(Token('RULE', 'file_input'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'hasher1')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 's')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'if_stmt'), [Tree(Token('RULE', 'comparison'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 's')])]), Tree(Token('RULE', 'comp_op'), [Token('__ANON_19', '==')]), Tree(Token('RULE', 'string'), [Token('STRING', '"document"')])]), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '8429038')])])]), Tree(Token('RULE', 'elifs'), []), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree(Token('RULE', 'factor'), [Token('MINUS', '-'), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '1')])])])])])])]), Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'hasher2')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 's')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'if_stmt'), [Tree(Token('RULE', 'comparison'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 's')])]), Tree(Token('RULE', 'comp_op'), [Token('__ANON_19', '==')]), Tree(Token('RULE', 'string'), [Token('STRING', '"document"')])]), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '5405432')])])]), Tree(Token('RULE', 'elifs'), []), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree(Token('RULE', 'factor'), [Token('MINUS', '-'), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '1')])])])])])])]), Tree(Token('RULE', 'classdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'Encryption')]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', '__init__')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'pass_stmt'), [])])]), Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'hash')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 's')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'hasher1')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 's')])])])])])])])])]), Tree(Token('RULE', 'classdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'Encryption')]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '2')]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', '__init__')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'pass_stmt'), [])])]), Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'hash')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 's')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'hasher2')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 's')])])])])])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'file_name')])]), Tree(Token('RULE', 'string'), [Token('STRING', '"document"')])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'e_v1')])]), Tree('funccallwithversion', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'Encryption')])]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), None])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'encrypted_file_name')])]), Tree('funccall', [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'e_v1')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'hash')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'file_name')])])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'target_file_name')])]), Tree(Token('RULE', 'string'), [Token('STRING', '"document"')])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'e_v2')])]), Tree('funccallwithversion', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'Encryption')])]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '2')]), None])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'encrypted_target_file_name')])]), Tree('funccall', [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'e_v2')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'hash')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'target_file_name')])])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'result')])]), Tree(Token('RULE', 'comparison'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'encrypted_file_name')])]), Tree(Token('RULE', 'comp_op'), [Token('__ANON_19', '==')]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'encrypted_target_file_name')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'result')])])])])
-
-[Python AST]
-Module(
-    [
-        FunctionDef(
-            'hasher1',
-            arguments(
-                [],
-                [
-                    arg('s')],
-                kwonlyargs=[],
-                kw_defaults=[],
-                defaults=[]),
-            [
-                If(
-                    Compare(
-                        Name('s', Load()),
-                        [
-                            Eq()],
-                        [
-                            Constant('"document"')]),
-                    [
-                        Return(
-                            Constant(8429038.0))],
-                    [
-                        Return(
-                            UnaryOp(
-                                USub(),
-                                Constant(1.0)))])],
-            [],
-            type_params=[]),
-        FunctionDef(
-            'hasher2',
-            arguments(
-                [],
-                [
-                    arg('s')],
-                kwonlyargs=[],
-                kw_defaults=[],
-                defaults=[]),
-            [
-                If(
-                    Compare(
-                        Name('s', Load()),
-                        [
-                            Eq()],
-                        [
-                            Constant('"document"')]),
-                    [
-                        Return(
-                            Constant(5405432.0))],
-                    [
-                        Return(
-                            UnaryOp(
-                                USub(),
-                                Constant(1.0)))])],
-            [],
-            type_params=[]),
-        ClassDef(
-            'Encryption_v_1',
-            [],
-            [],
-            [
-                FunctionDef(
-                    '__init__',
-                    arguments(
-                        [],
-                        [
-                            arg('self')],
-                        kwonlyargs=[],
-                        kw_defaults=[],
-                        defaults=[]),
-                    [
-                        Pass()],
-                    [],
-                    type_params=[]),
-                FunctionDef(
-                    'hash',
-                    arguments(
-                        [],
-                        [
-                            arg('self'),
-                            arg('s')],
-                        kwonlyargs=[],
-                        kw_defaults=[],
-                        defaults=[]),
-                    [
-                        Return(
-                            Call(
-                                Name('hasher1', Load()),
-                                [
-                                    [
-                                        Name('s', Load())]],
-                                []))],
-                    [],
-                    type_params=[])],
-            [],
-            []),
-        ClassDef(
-            'Encryption_v_2',
-            [],
-            [],
-            [
-                FunctionDef(
-                    '__init__',
-                    arguments(
-                        [],
-                        [
-                            arg('self')],
-                        kwonlyargs=[],
-                        kw_defaults=[],
-                        defaults=[]),
-                    [
-                        Pass()],
-                    [],
-                    type_params=[]),
-                FunctionDef(
-                    'hash',
-                    arguments(
-                        [],
-                        [
-                            arg('self'),
-                            arg('s')],
-                        kwonlyargs=[],
-                        kw_defaults=[],
-                        defaults=[]),
-                    [
-                        Return(
-                            Call(
-                                Name('hasher2', Load()),
-                                [
-                                    [
-                                        Name('s', Load())]],
-                                []))],
-                    [],
-                    type_params=[])],
-            [],
-            []),
-        Assign(
-            [
-                Name('file_name', Load())],
-            Constant('"document"')),
-        Assign(
-            [
-                Name('e_v1', Load())],
-            Call(
-                Name('Encryption_v_1', Load()),
-                [],
-                [])),
-        Assign(
-            [
-                Name('encrypted_file_name', Load())],
-            Call(
-                Attribute(
-                    Name('e_v1', Load()),
-                    'hash'),
-                [
-                    [
-                        Name('file_name', Load())]],
-                [])),
-        Assign(
-            [
-                Name('target_file_name', Load())],
-            Constant('"document"')),
-        Assign(
-            [
-                Name('e_v2', Load())],
-            Call(
-                Name('Encryption_v_2', Load()),
-                [],
-                [])),
-        Assign(
-            [
-                Name('encrypted_target_file_name', Load())],
-            Call(
-                Attribute(
-                    Name('e_v2', Load()),
-                    'hash'),
-                [
-                    [
-                        Name('target_file_name', Load())]],
-                [])),
-        Assign(
-            [
-                Name('result', Load())],
-            Compare(
-                Name('encrypted_file_name', Load()),
-                [
-                    Eq()],
-                [
-                    Name('encrypted_target_file_name', Load())])),
-        Expr(
-            Name('result', Load()))],
-    [])
+Tree(Token('RULE', 'file_input'), [Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a')])]), Tree(Token('RULE', 'comparison'), [Tree('const_true', []), Tree(Token('RULE', 'comp_op'), [Token('__ANON_23', '!=')]), Tree('const_false', []), Tree(Token('RULE', 'comp_op'), [Token('__ANON_19', '==')]), Tree('const_false', [])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a')])])])])])])
 
 [Unparse Python AST]
-def hasher1(s):
-    if s == '"document"':
-        return 8429038.0
+import re
+
+def __vt_init__(self):
+    self.vt = []
+    cn = self.__class__.__name__
+    pattern = '([A-Za-z_0-9]+)_v_([0-9]+)'
+    matchRe = re.fullmatch(pattern, cn)
+    if matchRe:
+        class_name = matchRe[1]
+        version_number = matchRe[2]
     else:
-        return -1.0
+        raise TypeError('Inappropriate Class Name')
+    self.vt.append((class_name, version_number, False))
+    return
 
-def hasher2(s):
-    if s == '"document"':
-        return 5405432.0
-    else:
-        return -1.0
+def checkCompatibility(left, right):
+    return
 
-class Encryption_v_1:
+def insert(self, c, v, b):
+    self.vt.append((c, v, b))
+    return
 
-    def __init__(self):
-        pass
+def append(left, right):
+    left_vt = left.vt
+    right_vt = right.vt
+    for x in left_vt:
+        cx = x[0]
+        vx = x[1]
+        bx = x[2]
+        for y in right_vt:
+            cy = y[0]
+            vy = y[1]
+            by = y[2]
+            if cx == cy and vx == vy and (bx == by):
+                left_vt.remove(x)
+    left.vt = left_vt + right_vt
+    return
 
-    def hash(self, s):
-        return hasher1(s)
+class Primitive_String_v_0:
 
-class Encryption_v_2:
+    def __init__(self, value):
+        self.value = value
+        __vt_init__(self)
 
-    def __init__(self):
-        pass
+    def __repr__(self):
+        return f'{self.value}'
 
-    def hash(self, s):
-        return hasher2(s)
-file_name = '"document"'
-e_v1 = Encryption_v_1()
-encrypted_file_name = e_v1.hash(file_name)
-target_file_name = '"document"'
-e_v2 = Encryption_v_2()
-encrypted_target_file_name = e_v2.hash(target_file_name)
-result = encrypted_file_name == encrypted_target_file_name
-result
+    def __add__(left, right):
+        return left.binary(right, 'add')
+
+    def __eq__(left, right):
+        return left.binary(right, 'eq')
+
+    def __ne__(left, right):
+        return left.binary(right, 'ne')
+
+    def __lt__(left, right):
+        return left.binary(right, 'lt')
+
+    def __gt__(left, right):
+        return left.binary(right, 'gt')
+
+    def __le__(left, right):
+        return left.binary(right, 'le')
+
+    def __ge__(left, right):
+        return left.binary(right, 'ge')
+
+    def __and__(left, right):
+        return left.binary(right, 'and')
+
+    def __or__(left, right):
+        return left.binary(right, 'or')
+
+    def binary(left, right, op):
+        checkCompatibility(left, right)
+        match op:
+            case 'add':
+                result = Primitive_String_v_0(left.value + right.value)
+            case 'and':
+                result = Primitive_Bool_v_0(left.value & right.value)
+            case 'or':
+                result = Primitive_Bool_v_0(left.value | right.value)
+            case 'eq':
+                result = Primitive_Bool_v_0(left.value == right.value)
+            case 'ne':
+                result = Primitive_Bool_v_0(left.value != right.value)
+            case 'lt':
+                result = Primitive_Bool_v_0(left.value < right.value)
+            case 'gt':
+                result = Primitive_Bool_v_0(left.value > right.value)
+            case 'le':
+                result = Primitive_Bool_v_0(left.value <= right.value)
+            case 'ge':
+                result = Primitive_Bool_v_0(left.value >= right.value)
+        append(result, left)
+        append(result, right)
+        return result
+
+class Primitive_Number_v_0:
+
+    def __init__(self, value):
+        self.value = value
+        __vt_init__(self)
+
+    def __repr__(self):
+        return f'{self.value}'
+
+    def __add__(left, right):
+        return left.binary(right, 'add')
+
+    def __sub__(left, right):
+        return left.binary(right, 'sub')
+
+    def __mul__(left, right):
+        return left.binary(right, 'mul')
+
+    def __div__(left, right):
+        return left.binary(right, 'div')
+
+    def __floordiv__(left, right):
+        return left.binary(right, 'floordiv')
+
+    def __mod__(left, right):
+        return left.binary(right, 'mod')
+
+    def __eq__(left, right):
+        return left.binary(right, 'eq')
+
+    def __ne__(left, right):
+        return left.binary(right, 'ne')
+
+    def __lt__(left, right):
+        return left.binary(right, 'lt')
+
+    def __gt__(left, right):
+        return left.binary(right, 'gt')
+
+    def __le__(left, right):
+        return left.binary(right, 'le')
+
+    def __ge__(left, right):
+        return left.binary(right, 'ge')
+
+    def __and__(left, right):
+        return left.binary(right, 'and')
+
+    def __or__(left, right):
+        return left.binary(right, 'or')
+
+    def binary(left, right, op):
+        checkCompatibility(left, right)
+        match op:
+            case 'add':
+                result = Primitive_Number_v_0(left.value + right.value)
+            case 'sub':
+                result = Primitive_Number_v_0(left.value - right.value)
+            case 'mul':
+                result = Primitive_Number_v_0(left.value * right.value)
+            case 'div':
+                result = Primitive_Number_v_0(left.value / right.value)
+            case 'mod':
+                result = Primitive_Number_v_0(left.value % right.value)
+            case 'floordiv':
+                result = Primitive_Number_v_0(left.value // right.value)
+            case 'and':
+                result = Primitive_Bool_v_0(left.value & right.value)
+            case 'or':
+                result = Primitive_Bool_v_0(left.value | right.value)
+            case 'eq':
+                result = Primitive_Bool_v_0(left.value == right.value)
+            case 'ne':
+                result = Primitive_Bool_v_0(left.value != right.value)
+            case 'lt':
+                result = Primitive_Bool_v_0(left.value < right.value)
+            case 'gt':
+                result = Primitive_Bool_v_0(left.value > right.value)
+            case 'le':
+                result = Primitive_Bool_v_0(left.value <= right.value)
+            case 'ge':
+                result = Primitive_Bool_v_0(left.value >= right.value)
+        append(result, left)
+        append(result, right)
+        return result
+
+class Primitive_Bool_v_0:
+
+    def __init__(self, value):
+        self.value = value
+        __vt_init__(self)
+
+    def __repr__(self):
+        return f'{self.value}'
+
+    def __eq__(left, right):
+        return left.binary(right, 'eq')
+
+    def __ne__(left, right):
+        return left.binary(right, 'ne')
+
+    def __and__(left, right):
+        return left.binary(right, 'and')
+
+    def __or__(left, right):
+        return left.binary(right, 'or')
+
+    def binary(left, right, op):
+        checkCompatibility(left, right)
+        match op:
+            case 'and':
+                result = Primitive_Bool_v_0(left.value & right.value)
+            case 'or':
+                result = Primitive_Bool_v_0(left.value | right.value)
+            case 'eq':
+                result = Primitive_Bool_v_0(left.value == right.value)
+            case 'ne':
+                result = Primitive_Bool_v_0(left.value != right.value)
+        append(result, left)
+        append(result, right)
+        return result
+a = Primitive_Bool_v_0(True) != Primitive_Bool_v_0(False) == Primitive_Bool_v_0(False)
+print(a)
+
+[Execute]
+None
 
