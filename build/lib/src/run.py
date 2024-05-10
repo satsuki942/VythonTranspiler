@@ -23,9 +23,9 @@ def main():
     pythonProgram = ast.unparse(pythonTree)
 
     # 結果をtmp.logに表示
-    with open('tmp.log', 'w') as log:
-        print("[Vython AST]",file=log)
-        print(vythonTree,file=log)
+    with open('output.py', 'w') as log:
+        print("# [Vython AST]",file=log)
+        print(f"# {vythonTree}",file=log)
         print("",file=log)
 
         # print("[Python AST]",file=log)
@@ -36,11 +36,11 @@ def main():
         # print(ast.dump(ast.parse(compare_code),False,True,indent=4),file=log)
         # print("",file=log)
 
-        print("[Unparse Python AST]",file=log)
+        print("# [Unparse Python AST]",file=log)
         print(pythonProgram,file=log)
         print("",file=log)
 
-        print("[Execute]",file=log)
+        print("# [Execute]",file=log)
         print(exec(pythonProgram,globals()),file=log)
         print("",file=log)
         

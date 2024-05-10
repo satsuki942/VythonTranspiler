@@ -82,10 +82,9 @@ class Transpiler(Transformer):
                     actual_args = []
                     for formal_arg in formal_args:
                         actual_args.append(ast.Name(id=formal_arg.arg,ctx=ast.Load()))
-                    new_method_ast.body[0].value = ast.Call(func=ast.Name(id=wrapped_func_name,ctx=ast.Load()),
-                                                            args=actual_args,
-                                                            keywords=[],lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-                    new_method_ast.body[1].value.args.append(ast.Name(id=formal_args[0].arg,ctx=ast.Load(),lineno=0,col_offset=0,end_lineno=0,end_col_offset=0))
+                    new_method_ast.body[0].value.func.attr = wrapped_func_name
+                    new_method_ast.body[0].value.args = [actual_args[1]]
+                    new_method_ast.body[1].value.args[1]=actual_args[0]
                     # wrappedメソッドのASTを変更
                     element.name = wrapped_func_name
                     # wrapメソッドの配置

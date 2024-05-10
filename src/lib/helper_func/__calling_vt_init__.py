@@ -1,1 +1,1 @@
-__vt__init__(self)
+__vt_init__(self)

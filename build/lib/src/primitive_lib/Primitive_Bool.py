@@ -3,6 +3,14 @@ class Primitive_Bool_v_0():
         self.value = value
         __vt_init__(self)
     
+    def __repr__(self):
+        return f"{self.value}"
+    
+    def equal(left,right):
+        return left.value == right.value
+    def nequal(left,right):
+        return left.value != right.value
+    
     # 検査 & VT書き換えを加える
     def __eq__(left,right):
         return left.binary(right,"eq")

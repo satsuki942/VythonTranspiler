@@ -5,6 +5,11 @@ class Primitive_Number_v_0():
     
     def __repr__(self):
         return f"{self.value}"
+    
+    def equal(left,right):
+        return left.value == right.value
+    def nequal(left,right):
+        return left.value != right.value
 
     def __add__(left,right):
         return left.binary(right,"add")
