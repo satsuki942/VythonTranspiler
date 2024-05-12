@@ -5,56 +5,74 @@ import copy
 global_func_paths = {"src/lib/global_func/global_func.py"}
 calling_vt_init_path = "src/lib/helper_func/__calling_vt_init__.py"
 calling_vt_append_path = "src/lib/helper_func/__calling_vt_append__.py"
-# checking_compatibility_path = ""
 
-primitive_classes = {"src/primitive_lib/Primitive_Bool.py","src/primitive_lib/Primitive_String.py","src/primitive_lib/Primitive_Number.py"}
+fake_global_func_paths = {"src/lib_tmp/global_func/global_func.py"}
+
+primitive_classes = {"src/lib/primitive_lib/Primitive_Bool.py","src/lib/primitive_lib/Primitive_String.py","src/lib/primitive_lib/Primitive_Number.py"}
 
 # larkToIRを参考に実装する
 class Transpiler(Transformer):
-    def __init__(self, debug_mode=False):
+    def __init__(self, debug_mode, transpile_mode):
         # 今の所使ってない
         self.debug_mode = debug_mode
-            
-        # Python ASTに挿入するグローバル関数(VT操作/検査)をASTに変換
-        global_func_asts = set()
-        for global_func_path in global_func_paths:
-            with open(global_func_path,"r") as file:
-                global_func_code = file.read()
-            global_func_asts.add(ast.parse(global_func_code))
-        # トランスパイラインスタンスの属性として保持
-        self.global_func_asts = global_func_asts
+        self.transpile_mode = transpile_mode
+        
+        if not self.transpile_mode:
+            # Python ASTに挿入するグローバル関数(VT操作/検査)をASTに変換
+            global_func_asts = set()
+            for global_func_path in global_func_paths:
+                with open(global_func_path,"r") as file:
+                    global_func_code = file.read()
+                global_func_asts.add(ast.parse(global_func_code))
+            # トランスパイラインスタンスの属性として保持
+            self.global_func_asts = global_func_asts
 
-        # 各メソッド、演算定義の前後に挿入されるヘルパ関数の呼び出しをASTに変換
-        # VT初期化関数の呼び出し
-        with open(calling_vt_init_path,"r") as file:
-            calling_vt_init_code = file.read()
-        self.calling_vt_init_ast = ast.parse(calling_vt_init_code).body
-        # VT検査関数の呼び出し
-        # with open(checking_compatibility_path, "r") as file:
-        #   checking_compatibility_code = file.read()
-        # self.checking_compatibility_ast = ast.parse(checking_compatibility_code)
-        # VT結合関数の呼び出し
-        with open(calling_vt_append_path,"r") as file:
-            calliing_vt_append_code = file.read()
-        self.calling_vt_append_ast = ast.parse(calliing_vt_append_code).body[0]
+            # 各メソッド、演算定義の前後に挿入されるヘルパ関数の呼び出しをASTに変換
+            # VT初期化関数の呼び出し
+            with open(calling_vt_init_path,"r") as file:
+                calling_vt_init_code = file.read()
+            self.calling_vt_init_ast = ast.parse(calling_vt_init_code).body
+            # VT検査関数の呼び出し
+            # with open(checking_compatibility_path, "r") as file:
+            #   checking_compatibility_code = file.read()
+            # self.checking_compatibility_ast = ast.parse(checking_compatibility_code)
+            # VT結合関数の呼び出し
+            with open(calling_vt_append_path,"r") as file:
+                calliing_vt_append_code = file.read()
+            self.calling_vt_append_ast = ast.parse(calliing_vt_append_code).body[0]
 
-        # Primitiveクラスの定義をASTに変換
-        primitive_class_asts = set()
-        for primitive_class in primitive_classes:
-            with open(primitive_class,"r") as file:
-                primitive_class_code = file.read()
-            primitive_class_asts.add(ast.parse(primitive_class_code))
-        # トランスパイラインスタンスの属性として保持
-        self.primitive_class_asts = primitive_class_asts
+            # Primitiveクラスの定義をASTに変換
+            primitive_class_asts = set()
+            for primitive_class in primitive_classes:
+                with open(primitive_class,"r") as file:
+                    primitive_class_code = file.read()
+                primitive_class_asts.add(ast.parse(primitive_class_code))
+            # トランスパイラインスタンスの属性として保持
+            self.primitive_class_asts = primitive_class_asts
+        else:
+            # Python ASTに挿入するグローバル関数(VT操作/検査)をASTに変換
+            fake_global_func_asts = set()
+            for fake_global_func_path in fake_global_func_paths:
+                with open(fake_global_func_path,"r") as file:
+                    fake_global_func_code = file.read()
+                fake_global_func_asts.add(ast.parse(fake_global_func_code))
+            # トランスパイラインスタンスの属性として保持
+            self.fake_global_func_asts = fake_global_func_asts
 
     def file_input(self, items):
         body = self._flatten_list(items)
-        # Primitiveクラスを挿入
-        for primitive_class_ast in self.primitive_class_asts:
-            body.insert(0,primitive_class_ast)
-        # グローバル関数を挿入: デバッグのため現在はoffにしている
-        for global_func_ast in self.global_func_asts:
-            body.insert(0,global_func_ast)
+
+        if not self.transpile_mode:
+            # Primitiveクラスを挿入
+            for primitive_class_ast in self.primitive_class_asts:
+                body.insert(0,primitive_class_ast)
+            # グローバル関数を挿入
+            for global_func_ast in self.global_func_asts:
+                body.insert(0,global_func_ast)
+        else:
+            # グローバル関数を挿入
+            for fake_global_func_ast in self.fake_global_func_asts:
+                body.insert(0,fake_global_func_ast)
 
         return ast.Module(body=body,type_ignores=[])
 
@@ -63,35 +81,36 @@ class Transpiler(Transformer):
         # バージョンの情報もクラス名が持つ
         class_name = str(name) + "_v_" + str(version)
 
-        wrapped_func_list = []
-        # basesの中身を検査
-        for element in body:
-            if isinstance(element,ast.FunctionDef):
-                # initializeメソッドAST に VT初期化関数呼び出しAST を挿入
-                if(element.name == "__init__"):
-                    element.body.append(self.calling_vt_init_ast)
-                # メソッドをラップし、VT書き換え関数呼び出しASTを挿入した新しいメソッドASTに変更する
-                else:
-                    new_method_ast = self.calling_vt_append_ast
-                    wrap_func_name = element.name
-                    wrapped_func_name = "__wrapped_" + wrap_func_name + "__"
-                    formal_args = element.args.args
-                    # wrapメソッドのASTを作成
-                    new_method_ast.name = wrap_func_name
-                    new_method_ast.args = element.args
-                    actual_args = []
-                    for formal_arg in formal_args:
-                        actual_args.append(ast.Name(id=formal_arg.arg,ctx=ast.Load()))
-                    new_method_ast.body[0].value.func.attr = wrapped_func_name
-                    new_method_ast.body[0].value.args = [actual_args[1]]
-                    new_method_ast.body[1].value.args[1]=actual_args[0]
-                    # wrappedメソッドのASTを変更
-                    element.name = wrapped_func_name
-                    # wrapメソッドの配置
-                    wrapped_func_list.append(new_method_ast)
+        if not self.transpile_mode:
+            wrapped_func_list = []
+            # basesの中身を検査
+            for element in body:
+                if isinstance(element,ast.FunctionDef):
+                    # initializeメソッドAST に VT初期化関数呼び出しAST を挿入
+                    if(element.name == "__init__"):
+                        element.body.append(self.calling_vt_init_ast)
+                    # メソッドをラップし、VT書き換え関数呼び出しASTを挿入した新しいメソッドASTに変更する
+                    else:
+                        new_method_ast = self.calling_vt_append_ast
+                        wrap_func_name = element.name
+                        wrapped_func_name = "__wrapped_" + wrap_func_name + "__"
+                        formal_args = element.args.args
+                        # wrapメソッドのASTを作成
+                        new_method_ast.name = wrap_func_name
+                        new_method_ast.args = element.args
+                        actual_args = []
+                        for formal_arg in formal_args:
+                            actual_args.append(ast.Name(id=formal_arg.arg,ctx=ast.Load()))
+                        new_method_ast.body[0].value.func.attr = wrapped_func_name
+                        new_method_ast.body[0].value.args = [actual_args[1]]
+                        new_method_ast.body[1].value.args[1]=actual_args[0]
+                        # wrappedメソッドのASTを変更
+                        element.name = wrapped_func_name
+                        # wrapメソッドの配置
+                        wrapped_func_list.append(new_method_ast)
 
-        for element in wrapped_func_list:
-            body.append(element)
+            for element in wrapped_func_list:
+                body.append(element)
 
         return ast.ClassDef(name=class_name,bases=[],keywords=[],body=body,decorator_list=[],type_params=[],lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
     
@@ -114,22 +133,30 @@ class Transpiler(Transformer):
     
     # primitiveを含むASTの変換(新)
     def const_true(self, items):
+        if self.transpile_mode:
+            return ast.Constant(True)
         value = ast.Constant(True,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
         return ast.Call(ast.Name(id="Primitive_Bool_v_0",ctx=ast.Load()),[value],[],lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
     
     def const_false(self, items):
+        if self.transpile_mode:
+            return ast.Constant(False)
         value = ast.Constant(False,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
         return ast.Call(ast.Name(id="Primitive_Bool_v_0",ctx=ast.Load()),[value],[],lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
     
     def string(self, items):
         value = items[0]
         transformed_value = self.transform(value) if isinstance(value, Tree) else value
+        if self.transpile_mode:
+            return ast.Constant(transformed_value.value)
         transformed_value = ast.Constant(transformed_value.value,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
         return ast.Call(ast.Name(id="Primitive_String_v_0",ctx=ast.Load()),[transformed_value],[],lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
     
     def number(self, items):
         value = items[0]
         transformed_value = self.transform(value) if isinstance(value, Tree) else value
+        if self.transpile_mode:
+            return ast.Constant(float(transformed_value.value))
         transformed_value = ast.Constant(float(transformed_value.value),lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
         return ast.Call(ast.Name(id="Primitive_Number_v_0",ctx=ast.Load()),[transformed_value],[],lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
 

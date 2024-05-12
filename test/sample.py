@@ -1,32 +1,52 @@
-class A!1:
-    def __init__(self,n):
-        self.num = n
+def hasher1(s):
+    if(s=="document"):
+        return 8429038
+    else:
+        return -1
 
-    def m(self,r):
-        return self.num + r
+def hasher2(s):
+    if(s=="document"):
+        return 5405432
+    else:
+        return -1
 
-class A!2:
-    def __init__(self,n):
-        self.num = n
-    
-    def m(self,r):
-        result = self.num+r
-        # incompatの時だけ困る
-        incompat(self,result)
+class Encryption!1:
+    def __init__(self):
+        pass
+    def hash(self,s):
+        return hasher1(s)
+        
+class Encryption!2:
+    def __init__(self):
+        pass
+    def hash(self, s):
+        # return hasher2(s)
+        result = hasher2(s)
+        incompat(self, result)
         return result
 
-a1 = A!2(4)
-print(a1.vt)
-a2 = A!1(3)
-print(a2.vt)
-n1 = a1.m(5)
-print(n1.vt)
-# ここがおかしい
-n2 = a2.m(1)
-print(n2.vt)
-n3 = n1+n2
-print(n3.vt)
+#--------------------------------------------
+#-----------------  main  -------------------
+#--------------------------------------------
+file_name = "document"
 
-print(n3)
+# file名を暗号化して保存
+e_v1 = Encryption!1()
+encrypted_file_name = e_v1.hash(file_name)
 
+# ~~~~~~~~~~~~~~~
 
+# file名の検索 -> ハッシュ値を用いた比較検査によって検索
+target_file_name = "document"
+e_v2 = Encryption!2()
+encrypted_target_file_name = e_v2.hash(target_file_name)
+
+# if(encrypted_file_name == encrypted_target_file_name):
+#     result = True
+# else:
+#     result = False
+
+result = (encrypted_file_name == encrypted_target_file_name)
+
+# 結果を出力
+print(result)

@@ -8,11 +8,11 @@ src/vython_parser.py
 src/lib/__init__.py
 src/lib/global_func/__init__.py
 src/lib/global_func/global_func.py
-src/primitive_lib/PrimitiveClasses.py
-src/primitive_lib/Primitive_Bool.py
-src/primitive_lib/Primitive_Number.py
-src/primitive_lib/Primitive_String.py
-src/primitive_lib/__init__.py
+src/lib/primitive_lib/PrimitiveClasses.py
+src/lib/primitive_lib/Primitive_Bool.py
+src/lib/primitive_lib/Primitive_Number.py
+src/lib/primitive_lib/Primitive_String.py
+src/lib/primitive_lib/__init__.py
 src/syntax/__init__.py
 src/syntax/language.py
 vythonT.egg-info/PKG-INFO

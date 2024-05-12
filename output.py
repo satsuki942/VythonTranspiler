@@ -1,6 +1,3 @@
-# [Vython AST]
-# Tree(Token('RULE', 'file_input'), [Tree(Token('RULE', 'classdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'A')]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', '__init__')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 'n')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'num')])]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n')])])])])])]), Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'm')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 'r')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree(Token('RULE', 'arith_expr'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'num')])]), Token('PLUS', '+'), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'r')])])])])])])])]), Tree(Token('RULE', 'classdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'A')]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '2')]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', '__init__')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 'n')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'num')])]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n')])])])])])]), Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'm')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 'r')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'result')])]), Tree(Token('RULE', 'arith_expr'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'num')])]), Token('PLUS', '+'), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'r')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'incompat')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'result')])])])])]), Tree(Token('RULE', 'return_stmt'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'result')])])])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a1')])]), Tree('funccallwithversion', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'A')])]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '2')]), Tree(Token('RULE', 'arguments'), [Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '4')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a1')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'vt')])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a2')])]), Tree('funccallwithversion', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'A')])]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), Tree(Token('RULE', 'arguments'), [Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '3')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a2')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'vt')])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n1')])]), Tree('funccall', [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a1')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'm')])]), Tree(Token('RULE', 'arguments'), [Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '5')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n1')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'vt')])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n2')])]), Tree('funccall', [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a2')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'm')])]), Tree(Token('RULE', 'arguments'), [Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '1')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n2')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'vt')])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n3')])]), Tree(Token('RULE', 'arith_expr'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n1')])]), Token('PLUS', '+'), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n2')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n3')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'vt')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n3')])])])])])])
-
 # [Unparse Python AST]
 import re
 
@@ -273,43 +270,16 @@ class Primitive_String_v_0:
 
 class A_v_1:
 
-    def __init__(self, n):
-        self.num = n
+    def __init__(self, value):
+        self.value = value
         __vt_init__(self)
-
-    def __wrapped_m__(self, r):
-        return self.num + r
-
-    def m(self, r):
-        result = self.__wrapped_m__(r)
-        append(result, self)
-        return result
 
 class A_v_2:
 
-    def __init__(self, n):
-        self.num = n
+    def __init__(self, value):
+        self.value = value
         __vt_init__(self)
-
-    def __wrapped_m__(self, r):
-        result = self.num + r
-        incompat(self, result)
-        return result
-
-    def m(self, r):
-        result = self.__wrapped_m__(r)
-        append(result, self)
-        return result
-a1 = A_v_2(Primitive_Number_v_0(4.0))
-print(a1.vt)
-a2 = A_v_1(Primitive_Number_v_0(3.0))
-print(a2.vt)
-n1 = a1.m(Primitive_Number_v_0(5.0))
-print(n1.vt)
-n2 = a2.m(Primitive_Number_v_0(1.0))
-print(n2.vt)
-n3 = n1 + n2
-print(n3.vt)
-print(n3)
-
-# [Execute]
+a1 = A_v_1(Primitive_Number_v_0(1.0))
+a2 = A_v_2(Primitive_Number_v_0(3.0))
+print(Primitive_String_v_0('"hi"'))
+print(a1.value + a2.value)
