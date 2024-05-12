@@ -1,12 +1,27 @@
 How to Install/Run
 
-1. vythonトランスパイラのインストール。
+## vythonトランスパイラのインストール。
     - プロジェクトルートで以下を実行
-```
+```sh
 pip install .
 ```
-2. コンパイル & 実行するには、以下を実行
-    - /test/sample.pyに書かれたvythonプログラムをPythonプログラムに変換し、そのプログラムを/tmp.logに出力します。
+## コンパイル & 実行
+`vythonT` で `test/sample.py` をコンパイル・実行するには、以下を実行してください。
+```sh
+vythonT test/sample.py
 ```
-vythonT
+
+`vython` コンパイラはオプションで詳細な情報を出力可能です。
+
+```sh
+vython --debug test/sample.py # tmp.logにログを出力 / output.pyにunparseしたpythonプログラムを出力
+vython -d test/sample.py
+```
+
+```sh
+vython --ast test/sample.py # tmp.logにPython ASTを出力
+```
+
+```sh
+vython --wo test/sample.py # 値にVersion情報を付加しないPythonプログラムASTにトランスパイルして実行する
 ```
