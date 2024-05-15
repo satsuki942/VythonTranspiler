@@ -6,6 +6,12 @@ class Primitive_String_v_0():
     def __repr__(self):
         return f"{self.value}"
     
+    def __bool__(self):
+        return bool(self.value)
+    
+    def __len__(self):
+        return len(self.value)
+    
     def equal(left,right):
         return left.value == right.value
     def nequal(left,right):
@@ -25,19 +31,12 @@ class Primitive_String_v_0():
         return left.binary(right,"le")
     def __ge__(left,right):
         return left.binary(right,"ge")
-    def __and__(left,right):
-        return left.binary(right,"and")
-    def __or__(left,right):
-        return left.binary(right,"or")
     
     def binary(left,right,op):
         checkCompatibility(left,right)
         match op:
             # 連結
             case "add": result = Primitive_String_v_0(left.value + right.value)
-            # 論理
-            case "and": result = Primitive_Bool_v_0(left.value & right.value)
-            case "or": result = Primitive_Bool_v_0(left.value | right.value)
             # 比較
             case "eq": result = Primitive_Bool_v_0(left.value == right.value)
             case "ne": result = Primitive_Bool_v_0(left.value != right.value)

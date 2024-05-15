@@ -181,7 +181,7 @@ class Transpiler(Transformer):
     def comparison(self, items):
         # 要素数が適切かどうかのチェック
         size = len(items)
-        if(size%2==0 | size<3):
+        if(size%2==0 or size<3):
             raise TypeError("Vython->Python: Inappropriate form of comparison")
         
         value_left = items[0]
@@ -199,7 +199,24 @@ class Transpiler(Transformer):
                 transformed_comparators.append(transformed_comparator)
         return ast.Compare(left=transformed_value_l,ops=transformed_ops,comparators=transformed_comparators,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
     
-    def or_expr(self, items):
+    # ビット演算だった
+    # def or_expr(self, items):
+    #     value_left = items[0]
+    #     value_right = items[1]
+    #     transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
+    #     transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
+    #     transformed_values = [transformed_value_l,transformed_value_r]
+    #     return ast.BoolOp(op=ast.Or(), values=transformed_values,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
+    
+    # def and_expr(self, items):
+    #     value_left = items[0]
+    #     value_right = items[1]
+    #     transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
+    #     transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
+    #     transformed_values = [transformed_value_l,transformed_value_r]
+    #     return ast.BoolOp(op=ast.And(), values=transformed_values,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
+    
+    def or_test(self, items):
         value_left = items[0]
         value_right = items[1]
         transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
@@ -207,7 +224,7 @@ class Transpiler(Transformer):
         transformed_values = [transformed_value_l,transformed_value_r]
         return ast.BoolOp(op=ast.Or(), values=transformed_values,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
     
-    def and_expr(self, items):
+    def and_test(self, items):
         value_left = items[0]
         value_right = items[1]
         transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
@@ -268,129 +285,44 @@ class Transpiler(Transformer):
             op = ast.USub()
         return ast.UnaryOp(op,transformed_value_r,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
 
-    def old_transform():
-        return
-        # primitiveを含むASTの変換(旧)
-        # def const_true(self, items):
-        #     return ast.Constant(True,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-        
-        # def const_false(self, items):
-        #     return ast.Constant(False,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-        
-        # def string(self, items):
-        #     value = items[0]
-        #     transformed_value = self.transform(value) if isinstance(value, Tree) else value
-        #     return ast.Constant(transformed_value.value,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-        
-        # def number(self, items):
-        #     value = items[0]
-        #     transformed_value = self.transform(value) if isinstance(value, Tree) else value
-        #     return ast.Constant(float(transformed_value.value),lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
+    def make_if_ast(self, elif_list, else_body):
+        if len(elif_list) == 0:
+            return else_body
+        elif len(elif_list) == 2:
+            test = elif_list[0]
+            body = elif_list[1]
+            orelse = else_body
+        else:
+            test = elif_list[0]
+            body = elif_list[1]
+            orelse = [self.make_if_ast(elif_list[2:],else_body)]
+        return ast.If(test=test,body=body,orelse=orelse,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
 
-        # def comp_op(self, items):
-        #     value = items[0]
-        #     transformed_value = self.transform(value) if isinstance(value, Tree) else value
-        #     match transformed_value:
-        #         case "==":
-        #             transformed_op = ast.Eq()
-        #         case "!=":
-        #             transformed_op = ast.NotEq()
-        #         case ">":
-        #             transformed_op = ast.Gt()
-        #         case "<":
-        #             transformed_op = ast.Lt()
-        #         case "<=":
-        #             transformed_op = ast.LtE()
-        #         case ">=":
-        #             transformed_op = ast.GtE()
-        #     return transformed_op
-
-        # def comparison(self, items):
-        #     # 要素数が適切かどうかのチェック
-        #     size = len(items)
-        #     if(size%2==0 | size<3):
-        #         raise TypeError("Vython->Python: Inappropriate form of comparison")
-            
-        #     value_left = items[0]
-        #     transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
-        #     transformed_ops = []
-        #     transformed_comparators = []
-        #     for i in range(1, size):
-        #         if i%2==1:
-        #             op = items[i]
-        #             transformed_op = self.transform(op) if isinstance(op, Tree) else op
-        #             transformed_ops.append(transformed_op)
-        #         else:
-        #             comparator = items[i]
-        #             transformed_comparator = self.transform(comparator) if isinstance(comparator, Tree) else comparator
-        #             transformed_comparators.append(transformed_comparator)
-        #     return ast.Compare(left=transformed_value_l,ops=transformed_ops,comparators=transformed_comparators,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-        
-        # def or_expr(self, items):
-        #     value_left = items[0]
-        #     value_right = items[1]
-        #     transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
-        #     transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
-        #     transformed_values = [transformed_value_l,transformed_value_r]
-        #     return ast.BoolOp(op=ast.Or(), values=transformed_values,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-        
-        # def and_expr(self, items):
-        #     value_left = items[0]
-        #     value_right = items[1]
-        #     transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
-        #     transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
-        #     transformed_values = [transformed_value_l,transformed_value_r]
-        #     return ast.BoolOp(op=ast.And(), values=transformed_values,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-
-        # def arith_expr(self, items):
-        #     value_left = items[0]
-        #     op = items[1]
-        #     value_right = items[2]
-        #     transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
-        #     transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
-        #     transformed_op = self.transform(op) if isinstance(op, Tree) else op
-        #     match transformed_op:
-        #         case "+": transformed_op = ast.Add()
-        #         case "-": transformed_op = ast.Sub()
-        #     return ast.BinOp(transformed_value_l,transformed_op,transformed_value_r,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-
-        # def term(self, items):
-        #     value_left = items[0]
-        #     op = items[1]
-        #     value_right = items[2]
-        #     transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
-        #     transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
-        #     transformed_op = self.transform(op) if isinstance(op, Tree) else op
-        #     match transformed_op:
-        #         case "*": transformed_op = ast.Mult()
-        #         case "/": transformed_op = ast.Div()
-        #         case "%": transformed_op = ast.Mod()
-        #         case "//": transformed_op = ast.FloorDiv()
-        #     return ast.BinOp(transformed_value_l,transformed_op,transformed_value_r,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-        
-        # def factor(self, items):
-        #     value_left = items[0]
-        #     value_right = items[1]
-        #     transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
-        #     transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
-        #     if(transformed_value_l == "+"):
-        #         op = ast.UAdd()
-        #     else:
-        #         op = ast.USub()
-        #     return ast.UnaryOp(op,transformed_value_r,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-
-    # elifにはまだ対応していない
     def if_stmt(self, items):
+        # testとbodyの実装
         test = items[0]
         then_body = items[1]
-        elifs = items[2]
-        else_body = items[3]
         transformed_test = self.transform(test) if isinstance(test, Tree) else test
         transformed_test = ast.Call(ast.Name(id="isTruthy",ctx=ast.Load()),[transformed_test],[],lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-        transformed_then_body = self.transform(then_body) if isinstance(then_body, Tree) else then_body
-        transformed_elifs = self.transform(elifs) if isinstance(elifs, Tree) else elifs
+        transformed_body = self.transform(then_body) if isinstance(then_body, Tree) else then_body
+
+        elif_list = items[2]
+        else_body = items[3]
+        transformed_elif_list = self.transform(elif_list) if isinstance(elif_list, Tree) else elif_list
         transformed_else_body = self.transform(else_body) if isinstance(else_body, Tree) else else_body
-        return ast.If(transformed_test,transformed_then_body,transformed_else_body,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
+        transformed_orelse = [self.make_if_ast(transformed_elif_list,transformed_else_body)]
+
+        return ast.If(test=transformed_test,body=transformed_body,orelse=transformed_orelse,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
+    
+    def elifs(self, items):
+        return self._flatten_list(items)
+    
+    def elif_(self, items):
+        test = items[0]
+        then_body = items[1]
+        transformed_test = self.transform(test) if isinstance(test, Tree) else test
+        transformed_then_body = self.transform(then_body) if isinstance(then_body, Tree) else then_body
+        return [transformed_test, transformed_then_body]
 
     def funccall(self, items):
         func, args = items[0], self._flatten_list(items[1:])

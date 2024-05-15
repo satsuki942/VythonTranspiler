@@ -36,8 +36,8 @@ class Primitive_String_v_0():
             # 連結
             case "add": result = Primitive_String_v_0(left.value + right.value)
             # 論理
-            case "and": result = Primitive_Bool_v_0(left.value & right.value)
-            case "or": result = Primitive_Bool_v_0(left.value | right.value)
+            case "and": result = Primitive_Bool_v_0(left.value and right.value)
+            case "or": result = Primitive_Bool_v_0(left.value or right.value)
             # 比較
             case "eq": result = Primitive_Bool_v_0(left.value == right.value)
             case "ne": result = Primitive_Bool_v_0(left.value != right.value)

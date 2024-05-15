@@ -1,7 +1,6 @@
 README.md
 setup.py
 src/__init__.py
-src/larkToIR.py
 src/run.py
 src/transpiler.py
 src/vython_parser.py

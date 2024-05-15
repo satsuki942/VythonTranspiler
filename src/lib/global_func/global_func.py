@@ -34,13 +34,13 @@ def checkCompatibility(left,right):
             c = y[0]
             v = y[1]
             for x in left.vt:
-                if((x[0]==c) & (x[1]!=v)):
+                if((x[0]==c) and (x[1]!=v)):
                     raise TypeError(f"Inconsistent Version Usage:\nComparing {c}!{x[1]} and {c}!{v} values")
     return
 
 def is_include(left,c,v,b):
     for x in left:
-        if (x[0]==c) & (x[1]==v) & (x[2]==b):
+        if (x[0]==c) and (x[1]==v) and (x[2]==b):
             return True
     return False
 
@@ -79,4 +79,4 @@ def isTruthy(obj):
         x = obj.value
     elif(isinstance(obj, Primitive_Bool_v_0)):
         x = obj.value
-    return Primitive_Bool_v_0(True).value & x
+    return Primitive_Bool_v_0(True).value and x

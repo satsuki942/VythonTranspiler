@@ -32,13 +32,13 @@ def checkCompatibility(left, right):
             c = y[0]
             v = y[1]
             for x in left.vt:
-                if (x[0] == c) & (x[1] != v):
+                if x[0] == c and x[1] != v:
                     raise TypeError(f'Inconsistent Version Usage:\nComparing {c}!{x[1]} and {c}!{v} values')
     return
 
 def is_include(left, c, v, b):
     for x in left:
-        if (x[0] == c) & (x[1] == v) & (x[2] == b):
+        if x[0] == c and x[1] == v and (x[2] == b):
             return True
     return False
 
@@ -75,74 +75,7 @@ def isTruthy(obj):
         x = obj.value
     elif isinstance(obj, Primitive_Bool_v_0):
         x = obj.value
-    return Primitive_Bool_v_0(True).value & x
-
-class Primitive_String_v_0:
-
-    def __init__(self, value):
-        self.value = value
-        __vt_init__(self)
-
-    def __repr__(self):
-        return f'{self.value}'
-
-    def equal(left, right):
-        return left.value == right.value
-
-    def nequal(left, right):
-        return left.value != right.value
-
-    def __add__(left, right):
-        return left.binary(right, 'add')
-
-    def __eq__(left, right):
-        return left.binary(right, 'eq')
-
-    def __ne__(left, right):
-        return left.binary(right, 'ne')
-
-    def __lt__(left, right):
-        return left.binary(right, 'lt')
-
-    def __gt__(left, right):
-        return left.binary(right, 'gt')
-
-    def __le__(left, right):
-        return left.binary(right, 'le')
-
-    def __ge__(left, right):
-        return left.binary(right, 'ge')
-
-    def __and__(left, right):
-        return left.binary(right, 'and')
-
-    def __or__(left, right):
-        return left.binary(right, 'or')
-
-    def binary(left, right, op):
-        checkCompatibility(left, right)
-        match op:
-            case 'add':
-                result = Primitive_String_v_0(left.value + right.value)
-            case 'and':
-                result = Primitive_Bool_v_0(left.value & right.value)
-            case 'or':
-                result = Primitive_Bool_v_0(left.value | right.value)
-            case 'eq':
-                result = Primitive_Bool_v_0(left.value == right.value)
-            case 'ne':
-                result = Primitive_Bool_v_0(left.value != right.value)
-            case 'lt':
-                result = Primitive_Bool_v_0(left.value < right.value)
-            case 'gt':
-                result = Primitive_Bool_v_0(left.value > right.value)
-            case 'le':
-                result = Primitive_Bool_v_0(left.value <= right.value)
-            case 'ge':
-                result = Primitive_Bool_v_0(left.value >= right.value)
-        append(result, left)
-        append(result, right)
-        return result
+    return Primitive_Bool_v_0(True).value and x
 
 class Primitive_Number_v_0:
 
@@ -152,6 +85,9 @@ class Primitive_Number_v_0:
 
     def __repr__(self):
         return f'{self.value}'
+
+    def __bool__(self):
+        return bool(self.value)
 
     def equal(left, right):
         return left.value == right.value
@@ -195,12 +131,6 @@ class Primitive_Number_v_0:
     def __ge__(left, right):
         return left.binary(right, 'ge')
 
-    def __and__(left, right):
-        return left.binary(right, 'and')
-
-    def __or__(left, right):
-        return left.binary(right, 'or')
-
     def __neg__(self):
         return self.unary('neg')
 
@@ -222,10 +152,6 @@ class Primitive_Number_v_0:
                 result = Primitive_Number_v_0(left.value % right.value)
             case 'floordiv':
                 result = Primitive_Number_v_0(left.value // right.value)
-            case 'and':
-                result = Primitive_Bool_v_0(left.value & right.value)
-            case 'or':
-                result = Primitive_Bool_v_0(left.value | right.value)
             case 'eq':
                 result = Primitive_Bool_v_0(left.value == right.value)
             case 'ne':
@@ -251,6 +177,69 @@ class Primitive_Number_v_0:
         append(result, self)
         return result
 
+class Primitive_String_v_0:
+
+    def __init__(self, value):
+        self.value = value
+        __vt_init__(self)
+
+    def __repr__(self):
+        return f'{self.value}'
+
+    def __bool__(self):
+        return bool(self.value)
+
+    def __len__(self):
+        return len(self.value)
+
+    def equal(left, right):
+        return left.value == right.value
+
+    def nequal(left, right):
+        return left.value != right.value
+
+    def __add__(left, right):
+        return left.binary(right, 'add')
+
+    def __eq__(left, right):
+        return left.binary(right, 'eq')
+
+    def __ne__(left, right):
+        return left.binary(right, 'ne')
+
+    def __lt__(left, right):
+        return left.binary(right, 'lt')
+
+    def __gt__(left, right):
+        return left.binary(right, 'gt')
+
+    def __le__(left, right):
+        return left.binary(right, 'le')
+
+    def __ge__(left, right):
+        return left.binary(right, 'ge')
+
+    def binary(left, right, op):
+        checkCompatibility(left, right)
+        match op:
+            case 'add':
+                result = Primitive_String_v_0(left.value + right.value)
+            case 'eq':
+                result = Primitive_Bool_v_0(left.value == right.value)
+            case 'ne':
+                result = Primitive_Bool_v_0(left.value != right.value)
+            case 'lt':
+                result = Primitive_Bool_v_0(left.value < right.value)
+            case 'gt':
+                result = Primitive_Bool_v_0(left.value > right.value)
+            case 'le':
+                result = Primitive_Bool_v_0(left.value <= right.value)
+            case 'ge':
+                result = Primitive_Bool_v_0(left.value >= right.value)
+        append(result, left)
+        append(result, right)
+        return result
+
 class Primitive_Bool_v_0:
 
     def __init__(self, value):
@@ -259,6 +248,9 @@ class Primitive_Bool_v_0:
 
     def __repr__(self):
         return f'{self.value}'
+
+    def __bool__(self):
+        return self.value
 
     def equal(left, right):
         return left.value == right.value
@@ -272,19 +264,9 @@ class Primitive_Bool_v_0:
     def __ne__(left, right):
         return left.binary(right, 'ne')
 
-    def __and__(left, right):
-        return left.binary(right, 'and')
-
-    def __or__(left, right):
-        return left.binary(right, 'or')
-
     def binary(left, right, op):
         checkCompatibility(left, right)
         match op:
-            case 'and':
-                result = Primitive_Bool_v_0(left.value & right.value)
-            case 'or':
-                result = Primitive_Bool_v_0(left.value | right.value)
             case 'eq':
                 result = Primitive_Bool_v_0(left.value == right.value)
             case 'ne':
@@ -293,12 +275,25 @@ class Primitive_Bool_v_0:
         append(result, right)
         return result
 
-def fib(n):
-    if isTruthy(n == Primitive_Number_v_0(0)):
-        return Primitive_Number_v_0(0)
-    if isTruthy(n == Primitive_Number_v_0(1)):
-        return Primitive_Number_v_0(1)
-    else:
-        return fib(n - Primitive_Number_v_0(1)) + fib(n - Primitive_Number_v_0(2))
-x = fib(Primitive_Number_v_0(23))
-print(x)
+class Person_v_1:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        __vt_init__(self)
+
+    def __wrapped_greet__(self):
+        return Primitive_String_v_0('"Hello, my name is "') + self.name
+
+    def greet(self):
+        result = self.__wrapped_greet__()
+        append(result, self)
+        return result
+person1 = Person_v_1(Primitive_String_v_0('"Alice"'), Primitive_Number_v_0(30))
+person2 = Person_v_1(Primitive_String_v_0('"Bob"'), Primitive_Number_v_0(25))
+print(person1.name)
+print(person1.age)
+print(person1.greet())
+print(person2.name)
+print(person2.age)
+print(person2.greet())
