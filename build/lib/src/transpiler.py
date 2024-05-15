@@ -32,10 +32,6 @@ class Transpiler(Transformer):
             with open(calling_vt_init_path,"r") as file:
                 calling_vt_init_code = file.read()
             self.calling_vt_init_ast = ast.parse(calling_vt_init_code).body
-            # VT検査関数の呼び出し
-            # with open(checking_compatibility_path, "r") as file:
-            #   checking_compatibility_code = file.read()
-            # self.checking_compatibility_ast = ast.parse(checking_compatibility_code)
             # VT結合関数の呼び出し
             with open(calling_vt_append_path,"r") as file:
                 calliing_vt_append_code = file.read()
@@ -91,7 +87,7 @@ class Transpiler(Transformer):
                         element.body.append(self.calling_vt_init_ast)
                     # メソッドをラップし、VT書き換え関数呼び出しASTを挿入した新しいメソッドASTに変更する
                     else:
-                        new_method_ast = self.calling_vt_append_ast
+                        new_method_ast = copy.deepcopy(self.calling_vt_append_ast)
                         wrap_func_name = element.name
                         wrapped_func_name = "__wrapped_" + wrap_func_name + "__"
                         formal_args = element.args.args
@@ -102,7 +98,7 @@ class Transpiler(Transformer):
                         for formal_arg in formal_args:
                             actual_args.append(ast.Name(id=formal_arg.arg,ctx=ast.Load()))
                         new_method_ast.body[0].value.func.attr = wrapped_func_name
-                        new_method_ast.body[0].value.args = [actual_args[1]]
+                        new_method_ast.body[0].value.args = actual_args[1:]
                         new_method_ast.body[1].value.args[1]=actual_args[0]
                         # wrappedメソッドのASTを変更
                         element.name = wrapped_func_name
@@ -155,9 +151,13 @@ class Transpiler(Transformer):
     def number(self, items):
         value = items[0]
         transformed_value = self.transform(value) if isinstance(value, Tree) else value
+        if isinstance(transformed_value, Token):
+            match transformed_value.type:
+                case 'DEC_NUMBER': transformed_value = int(transformed_value.value)
+                case 'FLOAT_NUMBER': transformed_value = float(transformed_value.value)
         if self.transpile_mode:
-            return ast.Constant(float(transformed_value.value))
-        transformed_value = ast.Constant(float(transformed_value.value),lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
+            return ast.Constant(transformed_value)
+        transformed_value = ast.Constant(transformed_value,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
         return ast.Call(ast.Name(id="Primitive_Number_v_0",ctx=ast.Load()),[transformed_value],[],lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
 
     def comp_op(self, items):
@@ -216,31 +216,47 @@ class Transpiler(Transformer):
         return ast.BoolOp(op=ast.And(), values=transformed_values,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
 
     def arith_expr(self, items):
-        value_left = items[0]
-        op = items[1]
-        value_right = items[2]
-        transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
-        transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
-        transformed_op = self.transform(op) if isinstance(op, Tree) else op
-        match transformed_op:
-            case "+": transformed_op = ast.Add()
-            case "-": transformed_op = ast.Sub()
-        return ast.BinOp(transformed_value_l,transformed_op,transformed_value_r,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
+        # 要素数が適切かどうかのチェック
+        size = len(items)
+        if(size%2==0):
+            raise TypeError("Vython->Python: Inappropriate form of arith_expr")
 
+        if(size == 1):
+            value = items[0]
+            transformed_value = self.transform(value) if isinstance(value, Tree) else value
+            return transformed_value
+        else:
+            value_right = items[size-1]
+            op = items[size-2]
+            transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
+            transformed_op = self.transform(op) if isinstance(op, Tree) else op
+            match transformed_op:
+                case "+": transformed_op = ast.Add()
+                case "-": transformed_op = ast.Sub()
+            return ast.BinOp(self.arith_expr(items[:-2]),transformed_op,transformed_value_r,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
+        
     def term(self, items):
-        value_left = items[0]
-        op = items[1]
-        value_right = items[2]
-        transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
-        transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
-        transformed_op = self.transform(op) if isinstance(op, Tree) else op
-        match transformed_op:
-            case "*": transformed_op = ast.Mult()
-            case "/": transformed_op = ast.Div()
-            case "%": transformed_op = ast.Mod()
-            case "//": transformed_op = ast.FloorDiv()
-        return ast.BinOp(transformed_value_l,transformed_op,transformed_value_r,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
-    
+        # 要素数が適切かどうかのチェック
+        size = len(items)
+        if(size%2==0):
+            raise TypeError("Vython->Python: Inappropriate form of arith_expr")
+
+        if(size == 1):
+            value = items[0]
+            transformed_value = self.transform(value) if isinstance(value, Tree) else value
+            return transformed_value
+        else:
+            value_right = items[size-1]
+            op = items[size-2]
+            transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
+            transformed_op = self.transform(op) if isinstance(op, Tree) else op
+            match transformed_op:
+                case "*": transformed_op = ast.Mult()
+                case "/": transformed_op = ast.Div()
+                case "%": transformed_op = ast.Mod()
+                case "//": transformed_op = ast.FloorDiv()
+            return ast.BinOp(self.arith_expr(items[:-2]),transformed_op,transformed_value_r,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
+
     def factor(self, items):
         value_left = items[0]
         value_right = items[1]
@@ -370,6 +386,7 @@ class Transpiler(Transformer):
         elifs = items[2]
         else_body = items[3]
         transformed_test = self.transform(test) if isinstance(test, Tree) else test
+        transformed_test = ast.Call(ast.Name(id="isTruthy",ctx=ast.Load()),[transformed_test],[],lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
         transformed_then_body = self.transform(then_body) if isinstance(then_body, Tree) else then_body
         transformed_elifs = self.transform(elifs) if isinstance(elifs, Tree) else elifs
         transformed_else_body = self.transform(else_body) if isinstance(else_body, Tree) else else_body

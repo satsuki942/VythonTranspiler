@@ -1,13 +1,10 @@
-class A!1:
-    def __init__(self,value):
-        self.value = value
+def fib(n):
+    if(n==0):
+        return 0
+    if(n==1):
+        return 1
+    else:
+        return fib(n-1) + fib(n-2)
 
-class A!2:
-    def __init__(self,value):
-        self.value = value
-
-a1 = A!1(1)
-a2 = A!2(3)
-
-print("hi")
-print(a1.value + a2.value)
+x = fib(23)
+print(x)

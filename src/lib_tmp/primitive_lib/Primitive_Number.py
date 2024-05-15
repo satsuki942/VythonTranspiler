@@ -40,6 +40,11 @@ class Primitive_Number_v_0():
     def __or__(left,right):
         return left.binary(right,"or")
     
+    def __neg__(self):
+        return self.unary("neg")
+    def __pos__(self):
+        return self.unary("pos")
+    
     def binary(left,right,op):
         checkCompatibility(left,right)
         match op:
@@ -62,4 +67,11 @@ class Primitive_Number_v_0():
             case "ge": result = Primitive_Bool_v_0(left.value >= right.value)
         append(result,left)
         append(result,right)
+        return result
+    
+    def unary(self,op):
+        match op:
+            case "neg": result = Primitive_Number_v_0(-self.value)
+            case "pos": result = Primitive_Number_v_0(self.value)
+        append(result,self)
         return result

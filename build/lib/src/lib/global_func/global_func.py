@@ -71,3 +71,12 @@ def incompat(self,value):
     insert(value,cv_pair[0],cv_pair[1],True)
     return
     
+def isTruthy(obj):
+    x = obj
+    if(isinstance(obj, Primitive_Number_v_0)):
+        x = obj.value
+    elif(isinstance(obj, Primitive_String_v_0)):
+        x = obj.value
+    elif(isinstance(obj, Primitive_Bool_v_0)):
+        x = obj.value
+    return Primitive_Bool_v_0(True).value & x
