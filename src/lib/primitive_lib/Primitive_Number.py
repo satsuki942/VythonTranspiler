@@ -9,6 +9,9 @@ class Primitive_Number_v_0():
     def __bool__(self):
         return bool(self.value)
     
+    def __str__(self):
+        return str(self.value)
+    
     def equal(left,right):
         return left.value == right.value
     def nequal(left,right):
@@ -20,7 +23,7 @@ class Primitive_Number_v_0():
         return left.binary(right,"sub")
     def __mul__(left,right):
         return left.binary(right,"mul")
-    def __div__(left,right):
+    def __truediv__(left,right):
         return left.binary(right,"div")
     def __floordiv__(left,right):
         return left.binary(right,"floordiv")

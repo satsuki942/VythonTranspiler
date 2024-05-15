@@ -132,7 +132,7 @@
 #         transformed_op = self.transform(op) if isinstance(op, Tree) else op
 #         match transformed_op:
 #             case "*": transformed_op = "__mul__"
-#             case "/": transformed_op = "__div__"
+#             case "/": transformed_op = "__truediv__"
 #             case "%": transformed_op = "__mod__"
 #             case "//": transformed_op = "__floordiv__"
 #         transformed_attr = Attribute(value=transformed_value_l, attr=transformed_op)

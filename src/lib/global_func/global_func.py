@@ -23,7 +23,6 @@ def __vt_init__(self):
 def checkCompatibility(left,right):
     for x in left.vt:
         if(x[2]):
-            print("debug")
             c = x[0]
             v = x[1]
             for y in right.vt:
@@ -52,9 +51,6 @@ def insert(value,c,v,b):
     return
 
 def append(left,right):
-    # 以下は見やすくするために行うもの、結合の順序を気にするなら変えた方がいい
-    left.vt
-    right.vt
     for x in left.vt:
         cx = x[0]
         vx = x[1]
@@ -70,13 +66,3 @@ def incompat(self,value):
     cv_pair = re_match(self)
     insert(value,cv_pair[0],cv_pair[1],True)
     return
-    
-def isTruthy(obj):
-    x = obj
-    if(isinstance(obj, Primitive_Number_v_0)):
-        x = obj.value
-    elif(isinstance(obj, Primitive_String_v_0)):
-        x = obj.value
-    elif(isinstance(obj, Primitive_Bool_v_0)):
-        x = obj.value
-    return Primitive_Bool_v_0(True).value and x

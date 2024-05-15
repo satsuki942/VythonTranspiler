@@ -21,7 +21,6 @@ def __vt_init__(self):
 def checkCompatibility(left, right):
     for x in left.vt:
         if x[2]:
-            print('debug')
             c = x[0]
             v = x[1]
             for y in right.vt:
@@ -50,8 +49,6 @@ def insert(value, c, v, b):
     return
 
 def append(left, right):
-    left.vt
-    right.vt
     for x in left.vt:
         cx = x[0]
         vx = x[1]
@@ -67,15 +64,68 @@ def incompat(self, value):
     insert(value, cv_pair[0], cv_pair[1], True)
     return
 
-def isTruthy(obj):
-    x = obj
-    if isinstance(obj, Primitive_Number_v_0):
-        x = obj.value
-    elif isinstance(obj, Primitive_String_v_0):
-        x = obj.value
-    elif isinstance(obj, Primitive_Bool_v_0):
-        x = obj.value
-    return Primitive_Bool_v_0(True).value and x
+class Primitive_String_v_0:
+
+    def __init__(self, value):
+        self.value = value
+        __vt_init__(self)
+
+    def __repr__(self):
+        return f'{self.value}'
+
+    def __bool__(self):
+        return bool(self.value)
+
+    def __len__(self):
+        return len(self.value)
+
+    def equal(left, right):
+        return left.value == right.value
+
+    def nequal(left, right):
+        return left.value != right.value
+
+    def __add__(left, right):
+        return left.binary(right, 'add')
+
+    def __eq__(left, right):
+        return left.binary(right, 'eq')
+
+    def __ne__(left, right):
+        return left.binary(right, 'ne')
+
+    def __lt__(left, right):
+        return left.binary(right, 'lt')
+
+    def __gt__(left, right):
+        return left.binary(right, 'gt')
+
+    def __le__(left, right):
+        return left.binary(right, 'le')
+
+    def __ge__(left, right):
+        return left.binary(right, 'ge')
+
+    def binary(left, right, op):
+        checkCompatibility(left, right)
+        match op:
+            case 'add':
+                result = Primitive_String_v_0(left.value + right.value)
+            case 'eq':
+                result = Primitive_Bool_v_0(left.value == right.value)
+            case 'ne':
+                result = Primitive_Bool_v_0(left.value != right.value)
+            case 'lt':
+                result = Primitive_Bool_v_0(left.value < right.value)
+            case 'gt':
+                result = Primitive_Bool_v_0(left.value > right.value)
+            case 'le':
+                result = Primitive_Bool_v_0(left.value <= right.value)
+            case 'ge':
+                result = Primitive_Bool_v_0(left.value >= right.value)
+        append(result, left)
+        append(result, right)
+        return result
 
 class Primitive_Number_v_0:
 
@@ -88,6 +138,9 @@ class Primitive_Number_v_0:
 
     def __bool__(self):
         return bool(self.value)
+
+    def __str__(self):
+        return str(self.value)
 
     def equal(left, right):
         return left.value == right.value
@@ -104,7 +157,7 @@ class Primitive_Number_v_0:
     def __mul__(left, right):
         return left.binary(right, 'mul')
 
-    def __div__(left, right):
+    def __truediv__(left, right):
         return left.binary(right, 'div')
 
     def __floordiv__(left, right):
@@ -177,69 +230,6 @@ class Primitive_Number_v_0:
         append(result, self)
         return result
 
-class Primitive_String_v_0:
-
-    def __init__(self, value):
-        self.value = value
-        __vt_init__(self)
-
-    def __repr__(self):
-        return f'{self.value}'
-
-    def __bool__(self):
-        return bool(self.value)
-
-    def __len__(self):
-        return len(self.value)
-
-    def equal(left, right):
-        return left.value == right.value
-
-    def nequal(left, right):
-        return left.value != right.value
-
-    def __add__(left, right):
-        return left.binary(right, 'add')
-
-    def __eq__(left, right):
-        return left.binary(right, 'eq')
-
-    def __ne__(left, right):
-        return left.binary(right, 'ne')
-
-    def __lt__(left, right):
-        return left.binary(right, 'lt')
-
-    def __gt__(left, right):
-        return left.binary(right, 'gt')
-
-    def __le__(left, right):
-        return left.binary(right, 'le')
-
-    def __ge__(left, right):
-        return left.binary(right, 'ge')
-
-    def binary(left, right, op):
-        checkCompatibility(left, right)
-        match op:
-            case 'add':
-                result = Primitive_String_v_0(left.value + right.value)
-            case 'eq':
-                result = Primitive_Bool_v_0(left.value == right.value)
-            case 'ne':
-                result = Primitive_Bool_v_0(left.value != right.value)
-            case 'lt':
-                result = Primitive_Bool_v_0(left.value < right.value)
-            case 'gt':
-                result = Primitive_Bool_v_0(left.value > right.value)
-            case 'le':
-                result = Primitive_Bool_v_0(left.value <= right.value)
-            case 'ge':
-                result = Primitive_Bool_v_0(left.value >= right.value)
-        append(result, left)
-        append(result, right)
-        return result
-
 class Primitive_Bool_v_0:
 
     def __init__(self, value):
@@ -275,25 +265,30 @@ class Primitive_Bool_v_0:
         append(result, right)
         return result
 
-class Person_v_1:
+def loop(c, f):
+    if c >= Primitive_Number_v_0(1):
+        f(c)
+        loop(c - Primitive_Number_v_0(1), f)
+    else:
+        return
 
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-        __vt_init__(self)
+class A_v_1:
 
-    def __wrapped_greet__(self):
-        return Primitive_String_v_0('"Hello, my name is "') + self.name
+    def __init__(this):
+        this.value = Primitive_Number_v_0(1)
+        __vt_init__(this)
 
-    def greet(self):
-        result = self.__wrapped_greet__()
-        append(result, self)
-        return result
-person1 = Person_v_1(Primitive_String_v_0('"Alice"'), Primitive_Number_v_0(30))
-person2 = Person_v_1(Primitive_String_v_0('"Bob"'), Primitive_Number_v_0(25))
-print(person1.name)
-print(person1.age)
-print(person1.greet())
-print(person2.name)
-print(person2.age)
-print(person2.greet())
+    def __wrapped_fact__(this, n):
+        this.value = this.value * n
+
+    def fact(this, n):
+        result = this.__wrapped_fact__(n)
+        if result is not None:
+            append(result, this)
+            return result
+        return
+a = A_v_1()
+print(a.value)
+fact_func = a.fact
+loop(Primitive_Number_v_0(10), fact_func)
+print(a.value)

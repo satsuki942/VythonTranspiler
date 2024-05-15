@@ -84,7 +84,9 @@ class Transpiler(Transformer):
                 if isinstance(element,ast.FunctionDef):
                     # initializeメソッドAST に VT初期化関数呼び出しAST を挿入
                     if(element.name == "__init__"):
-                        element.body.append(self.calling_vt_init_ast)
+                        new_init_ast = copy.deepcopy(self.calling_vt_init_ast)
+                        new_init_ast[0].value.args[0].id = element.args.args[0].arg
+                        element.body.append(new_init_ast)
                     # メソッドをラップし、VT書き換え関数呼び出しASTを挿入した新しいメソッドASTに変更する
                     else:
                         new_method_ast = copy.deepcopy(self.calling_vt_append_ast)
@@ -97,9 +99,11 @@ class Transpiler(Transformer):
                         actual_args = []
                         for formal_arg in formal_args:
                             actual_args.append(ast.Name(id=formal_arg.arg,ctx=ast.Load()))
+                        new_method_ast.body[0].value.func.value = ast.Name(id=formal_args[0].arg,ctx=ast.Load())
                         new_method_ast.body[0].value.func.attr = wrapped_func_name
                         new_method_ast.body[0].value.args = actual_args[1:]
-                        new_method_ast.body[1].value.args[1]=actual_args[0]
+                        new_method_ast.body[1].body[0].value.args[1]=actual_args[0]
+                        # new_method_ast.body[1].value.args[1]=actual_args[0]
                         # wrappedメソッドのASTを変更
                         element.name = wrapped_func_name
                         # wrapメソッドの配置
@@ -143,6 +147,7 @@ class Transpiler(Transformer):
     def string(self, items):
         value = items[0]
         transformed_value = self.transform(value) if isinstance(value, Tree) else value
+        transformed_value.value = transformed_value.value.replace('"',"")
         if self.transpile_mode:
             return ast.Constant(transformed_value.value)
         transformed_value = ast.Constant(transformed_value.value,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
@@ -232,6 +237,12 @@ class Transpiler(Transformer):
         transformed_values = [transformed_value_l,transformed_value_r]
         return ast.BoolOp(op=ast.And(), values=transformed_values,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
 
+    def not_test(self, items):
+        value = items[0]
+        transformed_value = self.transform(value) if isinstance(value, Tree) else value
+        op = ast.Not()
+        return ast.UnaryOp(op,transformed_value,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
+
     def arith_expr(self, items):
         # 要素数が適切かどうかのチェック
         size = len(items)
@@ -279,10 +290,9 @@ class Transpiler(Transformer):
         value_right = items[1]
         transformed_value_l = self.transform(value_left) if isinstance(value_left, Tree) else value_left
         transformed_value_r = self.transform(value_right) if isinstance(value_right, Tree) else value_right
-        if(transformed_value_l == "+"):
-            op = ast.UAdd()
-        else:
-            op = ast.USub()
+        match transformed_value_l:
+            case "+": op = ast.UAdd()
+            case "-": op = ast.USub()
         return ast.UnaryOp(op,transformed_value_r,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
 
     def make_if_ast(self, elif_list, else_body):
@@ -303,7 +313,6 @@ class Transpiler(Transformer):
         test = items[0]
         then_body = items[1]
         transformed_test = self.transform(test) if isinstance(test, Tree) else test
-        transformed_test = ast.Call(ast.Name(id="isTruthy",ctx=ast.Load()),[transformed_test],[],lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
         transformed_body = self.transform(then_body) if isinstance(then_body, Tree) else then_body
 
         elif_list = items[2]
@@ -311,6 +320,8 @@ class Transpiler(Transformer):
         transformed_elif_list = self.transform(elif_list) if isinstance(elif_list, Tree) else elif_list
         transformed_else_body = self.transform(else_body) if isinstance(else_body, Tree) else else_body
         transformed_orelse = [self.make_if_ast(transformed_elif_list,transformed_else_body)]
+        if transformed_orelse[0] is None:
+            transformed_orelse = []
 
         return ast.If(test=transformed_test,body=transformed_body,orelse=transformed_orelse,lineno=0,col_offset=0,end_lineno=0,end_col_offset=0)
     
