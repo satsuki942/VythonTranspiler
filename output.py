@@ -64,6 +64,41 @@ def incompat(self, value):
     insert(value, cv_pair[0], cv_pair[1], True)
     return
 
+class Primitive_Bool_v_0:
+
+    def __init__(self, value):
+        self.value = value
+        __vt_init__(self)
+
+    def __repr__(self):
+        return f'{self.value}'
+
+    def __bool__(self):
+        return self.value
+
+    def equal(left, right):
+        return left.value == right.value
+
+    def nequal(left, right):
+        return left.value != right.value
+
+    def __eq__(left, right):
+        return left.binary(right, 'eq')
+
+    def __ne__(left, right):
+        return left.binary(right, 'ne')
+
+    def binary(left, right, op):
+        checkCompatibility(left, right)
+        match op:
+            case 'eq':
+                result = Primitive_Bool_v_0(left.value == right.value)
+            case 'ne':
+                result = Primitive_Bool_v_0(left.value != right.value)
+        append(result, left)
+        append(result, right)
+        return result
+
 class Primitive_String_v_0:
 
     def __init__(self, value):
@@ -229,66 +264,27 @@ class Primitive_Number_v_0:
                 result = Primitive_Number_v_0(self.value)
         append(result, self)
         return result
-
-class Primitive_Bool_v_0:
-
-    def __init__(self, value):
-        self.value = value
-        __vt_init__(self)
-
-    def __repr__(self):
-        return f'{self.value}'
-
-    def __bool__(self):
-        return self.value
-
-    def equal(left, right):
-        return left.value == right.value
-
-    def nequal(left, right):
-        return left.value != right.value
-
-    def __eq__(left, right):
-        return left.binary(right, 'eq')
-
-    def __ne__(left, right):
-        return left.binary(right, 'ne')
-
-    def binary(left, right, op):
-        checkCompatibility(left, right)
-        match op:
-            case 'eq':
-                result = Primitive_Bool_v_0(left.value == right.value)
-            case 'ne':
-                result = Primitive_Bool_v_0(left.value != right.value)
-        append(result, left)
-        append(result, right)
-        return result
+counter = Primitive_Number_v_0(10)
 
 def loop(c, f):
-    if c >= Primitive_Number_v_0(1):
+    if c >= Primitive_Number_v_0(0):
         f(c)
         loop(c - Primitive_Number_v_0(1), f)
     else:
         return
 
-class A_v_1:
+class Printer_v_1:
 
-    def __init__(this):
-        this.value = Primitive_Number_v_0(1)
-        __vt_init__(this)
+    def __wrapped_print__(self, n):
+        print(n)
+        return
 
-    def __wrapped_fact__(this, n):
-        this.value = this.value * n
-
-    def fact(this, n):
-        result = this.__wrapped_fact__(n)
+    def print(self, n):
+        result = self.__wrapped_print__(n)
         if result is not None:
-            append(result, this)
+            append(result, self)
             return result
         return
-a = A_v_1()
-print(a.value)
-fact_func = a.fact
-loop(Primitive_Number_v_0(10), fact_func)
-print(a.value)
+printer = Printer_v_1()
+print_func = printer.print
+loop(counter, print_func)

@@ -1,9 +1,38 @@
-[step1] Generating vythonAST: 0.7619 seconds
-Tree(Token('RULE', 'file_input'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'loop')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'c')]), Tree(Token('RULE', 'name'), [Token('NAME', 'f')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'if_stmt'), [Tree(Token('RULE', 'comparison'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'c')])]), Tree(Token('RULE', 'comp_op'), [Token('__ANON_20', '>=')]), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '1')])]), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'f')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'c')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'loop')])]), Tree(Token('RULE', 'arguments'), [Tree(Token('RULE', 'arith_expr'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'c')])]), Token('MINUS', '-'), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '1')])]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'f')])])])])])]), Tree(Token('RULE', 'elifs'), []), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [None])])])])]), Tree(Token('RULE', 'classdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'A')]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', '__init__')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'this')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'this')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'value')])]), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '1')])])])])]), Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'fact')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'this')]), Tree(Token('RULE', 'name'), [Token('NAME', 'n')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'this')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'value')])]), Tree(Token('RULE', 'term'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'this')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'value')])]), Token('STAR', '*'), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n')])])])])])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a')])]), Tree('funccallwithversion', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'A')])]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), None])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'value')])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'fact_func')])]), Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'fact')])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'loop')])]), Tree(Token('RULE', 'arguments'), [Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '10')]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'fact_func')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'a')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'value')])])])])])])
+File Content:
+counter = 10
+def loop(c, f):
+    if(c >= 0):
+        f(c)
+        loop(c-1,f)
+    else:
+        return
 
-[step2] Transpiling vythonAST to PythonAST: 0.0033 seconds
+class Printer!1():
+    def print(self, n):
+        print(n)
+        return
 
-[step3] Unparsing PythonAST: 0.0033 seconds
+printer = Printer!1()
+print_func = printer.print
+loop(counter, print_func)
 
-[step4] Execute Python Program: 0.0028 seconds
-
+Tree(Token('RULE', 'file_input'), [Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'counter')])]), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '10')])])]), Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'loop')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'c')]), Tree(Token('RULE', 'name'), [Token('NAME', 'f')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'if_stmt'), [Tree(Token('RULE', 'comparison'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'c')])]), Tree(Token('RULE', 'comp_op'), [Token('__ANON_20', '>=')]), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '0')])]), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'f')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'c')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'loop')])]), Tree(Token('RULE', 'arguments'), [Tree(Token('RULE', 'arith_expr'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'c')])]), Token('MINUS', '-'), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '1')])]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'f')])])])])])]), Tree(Token('RULE', 'elifs'), []), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [None])])])])]), Tree(Token('RULE', 'classdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'Printer')]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'print')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 'n')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n')])])])])]), Tree(Token('RULE', 'return_stmt'), [None])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'printer')])]), Tree('funccallwithversion', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'Printer')])]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), None])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print_func')])]), Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'printer')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'print')])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'loop')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'counter')])]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print_func')])])])])])])
+[Phase 1] Prase to lark-vython AST
+  --> Completed in 0.7472 seconds
+[Phase 2] Transpile lark-vython AST to Python AST
+  --> Completed in 0.0077 seconds
+[Phase 3] Unparse Python AST
+  --> Completed in 0.0098 seconds
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+[Phase 4] Execution
+  --> Completed in 0.0028 seconds
