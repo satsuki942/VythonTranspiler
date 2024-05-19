@@ -1,28 +1,45 @@
 File Content:
-class Mat!1:
-    def __init__(self, n1, n2, n3):
-        self.n1 = n1
-        self.n2 = n2
-        self.n3 = n3
+class Hash!1:
+    def __init__(self):
+        pass
+    def hasher(self,s):
+        if(s=="document"):
+            return 8429038
+        else:
+            return -1
+        
+class Hash!2:
+    def __init__(self):
+        pass
+    def hasher(self,s):
+        if(s=="document"):
+            result = 5405432
+            incompat(self, result)
+            return result
+        else:
+            return -1
 
-    def matmul(self, other):
-        return self.n1 * other.n1 + self.n2 * other.n2 + self.n3 * other.n3
-    
 
-m1 = Mat!1(1,4,6)
-m2 = Mat!1(3,7,8)
-print(m1.matmul(m2))
+file_name = "document"
 
+# file名を暗号化して保存
+h_v1 = Hash!1()
+hashed_file_name = h_v1.hasher(file_name)
 
-Tree(Token('RULE', 'file_input'), [Tree(Token('RULE', 'classdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'Mat')]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', '__init__')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 'n1')]), Tree(Token('RULE', 'name'), [Token('NAME', 'n2')]), Tree(Token('RULE', 'name'), [Token('NAME', 'n3')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'n1')])]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n1')])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'n2')])]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n2')])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'n3')])]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'n3')])])])])])]), Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'matmul')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 'other')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree(Token('RULE', 'arith_expr'), [Tree(Token('RULE', 'term'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'n1')])]), Token('STAR', '*'), Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'other')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'n1')])])]), Token('PLUS', '+'), Tree(Token('RULE', 'term'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'n2')])]), Token('STAR', '*'), Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'other')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'n2')])])]), Token('PLUS', '+'), Tree(Token('RULE', 'term'), [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'n3')])]), Token('STAR', '*'), Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'other')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'n3')])])])])])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'm1')])]), Tree('funccallwithversion', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'Mat')])]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), Tree(Token('RULE', 'arguments'), [Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '1')]), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '4')]), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '6')])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'm2')])]), Tree('funccallwithversion', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'Mat')])]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), Tree(Token('RULE', 'arguments'), [Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '3')]), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '7')]), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '8')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('funccall', [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'm1')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'matmul')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'm2')])])])])])])])])
+# file名の検索 -> ハッシュ値を用いた比較検査によって検索
+target_file_name = "document"
+h_v2 = Hash!2()
+hashed_target_file_name = h_v2.hasher(target_file_name)
+
+result = (hashed_file_name == hashed_target_file_name)
+
+# 結果を出力
+print(result)
+
+Tree(Token('RULE', 'file_input'), [Tree(Token('RULE', 'classdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'Hash')]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', '__init__')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'pass_stmt'), [])])]), Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'hasher')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 's')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'if_stmt'), [Tree(Token('RULE', 'comparison'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 's')])]), Tree(Token('RULE', 'comp_op'), [Token('__ANON_19', '==')]), Tree(Token('RULE', 'string'), [Token('STRING', '"document"')])]), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '8429038')])])]), Tree(Token('RULE', 'elifs'), []), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree(Token('RULE', 'factor'), [Token('MINUS', '-'), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '1')])])])])])])])])]), Tree(Token('RULE', 'classdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'Hash')]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '2')]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', '__init__')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'pass_stmt'), [])])]), Tree(Token('RULE', 'funcdef'), [Tree(Token('RULE', 'name'), [Token('NAME', 'hasher')]), Tree(Token('RULE', 'parameters'), [Tree(Token('RULE', 'name'), [Token('NAME', 'self')]), Tree(Token('RULE', 'name'), [Token('NAME', 's')]), None, None]), None, Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'if_stmt'), [Tree(Token('RULE', 'comparison'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 's')])]), Tree(Token('RULE', 'comp_op'), [Token('__ANON_19', '==')]), Tree(Token('RULE', 'string'), [Token('STRING', '"document"')])]), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'result')])]), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '5405432')])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'incompat')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'self')])]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'result')])])])])]), Tree(Token('RULE', 'return_stmt'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'result')])])])]), Tree(Token('RULE', 'elifs'), []), Tree(Token('RULE', 'suite'), [Tree(Token('RULE', 'return_stmt'), [Tree(Token('RULE', 'factor'), [Token('MINUS', '-'), Tree(Token('RULE', 'number'), [Token('DEC_NUMBER', '1')])])])])])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'file_name')])]), Tree(Token('RULE', 'string'), [Token('STRING', '"document"')])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'h_v1')])]), Tree('funccallwithversion', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'Hash')])]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '1')]), None])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'hashed_file_name')])]), Tree('funccall', [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'h_v1')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'hasher')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'file_name')])])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'target_file_name')])]), Tree(Token('RULE', 'string'), [Token('STRING', '"document"')])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'h_v2')])]), Tree('funccallwithversion', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'Hash')])]), Tree(Token('RULE', 'version'), [Token('__ANON_25', '2')]), None])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'hashed_target_file_name')])]), Tree('funccall', [Tree('getattr', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'h_v2')])]), Tree(Token('RULE', 'name'), [Token('NAME', 'hasher')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'target_file_name')])])])])])]), Tree(Token('RULE', 'assign_stmt'), [Tree(Token('RULE', 'assign'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'result')])]), Tree(Token('RULE', 'comparison'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'hashed_file_name')])]), Tree(Token('RULE', 'comp_op'), [Token('__ANON_19', '==')]), Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'hashed_target_file_name')])])])])]), Tree(Token('RULE', 'expr_stmt'), [Tree('funccall', [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'print')])]), Tree(Token('RULE', 'arguments'), [Tree('var', [Tree(Token('RULE', 'name'), [Token('NAME', 'result')])])])])])])
 [Phase 1] Prase to lark-vython AST
-  --> Completed in 0.9446 seconds
+  --> Completed in 0.8051 seconds
 [Phase 2] Transpile lark-vython AST to Python AST
-  --> Completed in 0.0043 seconds
+  --> Completed in 0.0089 seconds
 [Phase 3] Unparse Python AST
-  --> Completed in 0.0066 seconds
-[Phase 4] Execution
-  --> Completed in 0.0037 seconds
-[Result]:
-79
-
+  --> Completed in 0.0068 seconds

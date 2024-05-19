@@ -64,69 +64,6 @@ def incompat(self, value):
     insert(value, cv_pair[0], cv_pair[1], True)
     return
 
-class Primitive_String_v_0:
-
-    def __init__(self, value):
-        self.value = value
-        __vt_init__(self)
-
-    def __repr__(self):
-        return f'{self.value}'
-
-    def __bool__(self):
-        return bool(self.value)
-
-    def __len__(self):
-        return len(self.value)
-
-    def equal(left, right):
-        return left.value == right.value
-
-    def nequal(left, right):
-        return left.value != right.value
-
-    def __add__(left, right):
-        return left.binary(right, 'add')
-
-    def __eq__(left, right):
-        return left.binary(right, 'eq')
-
-    def __ne__(left, right):
-        return left.binary(right, 'ne')
-
-    def __lt__(left, right):
-        return left.binary(right, 'lt')
-
-    def __gt__(left, right):
-        return left.binary(right, 'gt')
-
-    def __le__(left, right):
-        return left.binary(right, 'le')
-
-    def __ge__(left, right):
-        return left.binary(right, 'ge')
-
-    def binary(left, right, op):
-        checkCompatibility(left, right)
-        match op:
-            case 'add':
-                result = Primitive_String_v_0(left.value + right.value)
-            case 'eq':
-                result = Primitive_Bool_v_0(left.value == right.value)
-            case 'ne':
-                result = Primitive_Bool_v_0(left.value != right.value)
-            case 'lt':
-                result = Primitive_Bool_v_0(left.value < right.value)
-            case 'gt':
-                result = Primitive_Bool_v_0(left.value > right.value)
-            case 'le':
-                result = Primitive_Bool_v_0(left.value <= right.value)
-            case 'ge':
-                result = Primitive_Bool_v_0(left.value >= right.value)
-        append(result, left)
-        append(result, right)
-        return result
-
 class Primitive_Bool_v_0:
 
     def __init__(self, value):
@@ -265,23 +202,113 @@ class Primitive_Number_v_0:
         append(result, self)
         return result
 
-class Mat_v_1:
+class Primitive_String_v_0:
 
-    def __init__(self, n1, n2, n3):
-        self.n1 = n1
-        self.n2 = n2
-        self.n3 = n3
+    def __init__(self, value):
+        self.value = value
         __vt_init__(self)
 
-    def __wrapped_matmul__(self, other):
-        return self.n1 * other.n1 + self.n2 * other.n2 + self.n3 * other.n3
+    def __repr__(self):
+        return f'{self.value}'
 
-    def matmul(self, other):
-        result = self.__wrapped_matmul__(other)
+    def __bool__(self):
+        return bool(self.value)
+
+    def __len__(self):
+        return len(self.value)
+
+    def equal(left, right):
+        return left.value == right.value
+
+    def nequal(left, right):
+        return left.value != right.value
+
+    def __add__(left, right):
+        return left.binary(right, 'add')
+
+    def __eq__(left, right):
+        return left.binary(right, 'eq')
+
+    def __ne__(left, right):
+        return left.binary(right, 'ne')
+
+    def __lt__(left, right):
+        return left.binary(right, 'lt')
+
+    def __gt__(left, right):
+        return left.binary(right, 'gt')
+
+    def __le__(left, right):
+        return left.binary(right, 'le')
+
+    def __ge__(left, right):
+        return left.binary(right, 'ge')
+
+    def binary(left, right, op):
+        checkCompatibility(left, right)
+        match op:
+            case 'add':
+                result = Primitive_String_v_0(left.value + right.value)
+            case 'eq':
+                result = Primitive_Bool_v_0(left.value == right.value)
+            case 'ne':
+                result = Primitive_Bool_v_0(left.value != right.value)
+            case 'lt':
+                result = Primitive_Bool_v_0(left.value < right.value)
+            case 'gt':
+                result = Primitive_Bool_v_0(left.value > right.value)
+            case 'le':
+                result = Primitive_Bool_v_0(left.value <= right.value)
+            case 'ge':
+                result = Primitive_Bool_v_0(left.value >= right.value)
+        append(result, left)
+        append(result, right)
+        return result
+
+class Hash_v_1:
+
+    def __init__(self):
+        pass
+        __vt_init__(self)
+
+    def __wrapped_hasher__(self, s):
+        if s == Primitive_String_v_0('document'):
+            return Primitive_Number_v_0(8429038)
+        else:
+            return -Primitive_Number_v_0(1)
+
+    def hasher(self, s):
+        result = self.__wrapped_hasher__(s)
         if result is not None:
             append(result, self)
             return result
         return
-m1 = Mat_v_1(Primitive_Number_v_0(1), Primitive_Number_v_0(4), Primitive_Number_v_0(6))
-m2 = Mat_v_1(Primitive_Number_v_0(3), Primitive_Number_v_0(7), Primitive_Number_v_0(8))
-print(m1.matmul(m2))
+
+class Hash_v_2:
+
+    def __init__(self):
+        pass
+        __vt_init__(self)
+
+    def __wrapped_hasher__(self, s):
+        if s == Primitive_String_v_0('document'):
+            result = Primitive_Number_v_0(5405432)
+            incompat(self, result)
+            return result
+        else:
+            return -Primitive_Number_v_0(1)
+
+    def hasher(self, s):
+        result = self.__wrapped_hasher__(s)
+        if result is not None:
+            append(result, self)
+            return result
+        return
+file_name = Primitive_String_v_0('document')
+h_v1 = Hash_v_1()
+hashed_file_name = h_v1.hasher(file_name)
+target_file_name = Primitive_String_v_0('document')
+h_v2 = Hash_v_2()
+hashed_target_file_name = h_v2.hasher(target_file_name)
+result = hashed_file_name == hashed_target_file_name
+print(result)
