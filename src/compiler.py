@@ -1,5 +1,7 @@
 import time
 import ast
+import io
+import contextlib
 from src.vython_parser import Parser
 from src.transpiler import Transpiler
 
@@ -34,4 +36,19 @@ class Compiler:
                 print(self.pythonCode, file=log)
 
     def execute(self):
-        exec(self.pythonCode,globals())
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output): 
+            exec(self.pythonCode,globals())
+        captured_output = output.getvalue()
+        self.result = captured_output
+        return self.result
+    
+    def get_result(self):
+        return self.result
+
+    def get_result_fullpath(self):
+        self.parse()
+        self.transpile()
+        self.unparse()
+        self.execute()
+        return self.result

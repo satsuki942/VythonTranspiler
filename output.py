@@ -64,41 +64,6 @@ def incompat(self, value):
     insert(value, cv_pair[0], cv_pair[1], True)
     return
 
-class Primitive_Bool_v_0:
-
-    def __init__(self, value):
-        self.value = value
-        __vt_init__(self)
-
-    def __repr__(self):
-        return f'{self.value}'
-
-    def __bool__(self):
-        return self.value
-
-    def equal(left, right):
-        return left.value == right.value
-
-    def nequal(left, right):
-        return left.value != right.value
-
-    def __eq__(left, right):
-        return left.binary(right, 'eq')
-
-    def __ne__(left, right):
-        return left.binary(right, 'ne')
-
-    def binary(left, right, op):
-        checkCompatibility(left, right)
-        match op:
-            case 'eq':
-                result = Primitive_Bool_v_0(left.value == right.value)
-            case 'ne':
-                result = Primitive_Bool_v_0(left.value != right.value)
-        append(result, left)
-        append(result, right)
-        return result
-
 class Primitive_String_v_0:
 
     def __init__(self, value):
@@ -158,6 +123,41 @@ class Primitive_String_v_0:
                 result = Primitive_Bool_v_0(left.value <= right.value)
             case 'ge':
                 result = Primitive_Bool_v_0(left.value >= right.value)
+        append(result, left)
+        append(result, right)
+        return result
+
+class Primitive_Bool_v_0:
+
+    def __init__(self, value):
+        self.value = value
+        __vt_init__(self)
+
+    def __repr__(self):
+        return f'{self.value}'
+
+    def __bool__(self):
+        return self.value
+
+    def equal(left, right):
+        return left.value == right.value
+
+    def nequal(left, right):
+        return left.value != right.value
+
+    def __eq__(left, right):
+        return left.binary(right, 'eq')
+
+    def __ne__(left, right):
+        return left.binary(right, 'ne')
+
+    def binary(left, right, op):
+        checkCompatibility(left, right)
+        match op:
+            case 'eq':
+                result = Primitive_Bool_v_0(left.value == right.value)
+            case 'ne':
+                result = Primitive_Bool_v_0(left.value != right.value)
         append(result, left)
         append(result, right)
         return result
@@ -264,27 +264,24 @@ class Primitive_Number_v_0:
                 result = Primitive_Number_v_0(self.value)
         append(result, self)
         return result
-counter = Primitive_Number_v_0(10)
 
-def loop(c, f):
-    if c >= Primitive_Number_v_0(0):
-        f(c)
-        loop(c - Primitive_Number_v_0(1), f)
-    else:
-        return
+class Mat_v_1:
 
-class Printer_v_1:
+    def __init__(self, n1, n2, n3):
+        self.n1 = n1
+        self.n2 = n2
+        self.n3 = n3
+        __vt_init__(self)
 
-    def __wrapped_print__(self, n):
-        print(n)
-        return
+    def __wrapped_matmul__(self, other):
+        return self.n1 * other.n1 + self.n2 * other.n2 + self.n3 * other.n3
 
-    def print(self, n):
-        result = self.__wrapped_print__(n)
+    def matmul(self, other):
+        result = self.__wrapped_matmul__(other)
         if result is not None:
             append(result, self)
             return result
         return
-printer = Printer_v_1()
-print_func = printer.print
-loop(counter, print_func)
+m1 = Mat_v_1(Primitive_Number_v_0(1), Primitive_Number_v_0(4), Primitive_Number_v_0(6))
+m2 = Mat_v_1(Primitive_Number_v_0(3), Primitive_Number_v_0(7), Primitive_Number_v_0(8))
+print(m1.matmul(m2))

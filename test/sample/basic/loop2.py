@@ -1,5 +1,5 @@
 def loop(c, f):
-    if(c >= 1):
+    if(c > 0):
         f(c)
         loop(c-1,f)
     else:
@@ -12,7 +12,6 @@ class A!1:
         this.value = this.value * n
 
 a = A!1()
-print(a.value)
 fact_func = a.fact
 loop(10,fact_func)
 print(a.value)       

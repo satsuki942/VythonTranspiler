@@ -15,6 +15,9 @@ src/lib/primitive_lib/Primitive_String.py
 src/lib/primitive_lib/__init__.py
 src/syntax/__init__.py
 src/syntax/language.py
+test/__init__.py
+test/debug.py
+test/sample.py
 vythonT.egg-info/PKG-INFO
 vythonT.egg-info/SOURCES.txt
 vythonT.egg-info/dependency_links.txt

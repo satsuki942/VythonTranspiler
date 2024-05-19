@@ -24,7 +24,7 @@ def main():
         # index = 0 - vython
         # index = 1 - 実行モード T(ranspile),I(nterpret),Other..
         # としたい
-    execute_mode = sys.argv[0]
+    execute_mode = "vythonT"
     try:
         if execute_mode == "vythonT":
             for arg in sys.argv[1:]:
@@ -70,3 +70,4 @@ def main():
         execute_phase("[Phase 2] Transpile lark-vython AST to Python AST", lambda: compiler.transpile())
         execute_phase("[Phase 3] Unparse Python AST", lambda: compiler.unparse())
         execute_phase("[Phase 4] Execution", lambda: compiler.execute())
+        print(f"[Result]:\n{compiler.get_result()}")

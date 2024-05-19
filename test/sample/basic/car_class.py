@@ -20,4 +20,4 @@ print(car.make)       # Toyota
 print(car.model)      # Corolla
 print(car.year)       # 2020
 print(car.accelerate(30))  # 30
-print(car.brake(10))      # 20
+print(car.brake(40))      # 0

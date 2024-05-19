@@ -1,6 +1,6 @@
 counter = 10
 def loop(c, f):
-    if(c >= 0):
+    if(c > 0):
         f(c)
         loop(c-1,f)
     else:
